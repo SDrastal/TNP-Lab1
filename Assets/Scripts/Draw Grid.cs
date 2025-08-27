@@ -10,20 +10,16 @@ public class BoardCreator : MonoBehaviour
     {
         int i = 0;
         int j = 0;
-        while (i < 90)
+        while (i < 9)
         {
-        Gizmos.DrawLine(new Vector3(i, 0, 0), new Vector3(i, 80, 0));
-        i += 10;
+            Gizmos.DrawLine(new Vector3(i, 0, 0), new Vector3(i, 8, 0));
+            ++i;
         }
-
-        while (j < 90)
+        while (j < 9)
         {
-            Gizmos.DrawLine(new Vector3(0, j, 0), new Vector3(80, j, 0));
-            j += 10;
+            Gizmos.DrawLine(new Vector3(0, j, 0), new Vector3(8, j, 0));
+            ++j;
         }
-
-
-
     }
 #endif
 }
