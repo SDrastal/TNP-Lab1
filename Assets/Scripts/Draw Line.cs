@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class DrawLine : MonoBehaviour
 {
+    //INSPECTOR VARIABLES
+    //Dropdown selection
     public enum PieceType { Pawn, Rook, Knight, Bishop, Queen, King }
     [SerializeField] private PieceType pieceType;
 
+    //Color picker
     [ColorUsage(true, true)]
     public Color pieceColor;
 
+    //Always showing
     #if UNITY_EDITOR
     void OnDrawGizmos()
     {
+        //Show icon in selected color
         Gizmos.color = pieceColor;
+
+        //Show correct icon
         switch (pieceType)
         {
             case PieceType.Pawn:
@@ -36,8 +43,11 @@ public class DrawLine : MonoBehaviour
                 break;
         }
     }
+
+    //When piece is selected
     void OnDrawGizmosSelected()
     {
+        //
         switch (pieceType)
         {
             case PieceType.Pawn:
@@ -45,24 +55,32 @@ public class DrawLine : MonoBehaviour
                 Gizmos.DrawLine(transform.position + Vector3.left, transform.position - Vector3.left);
                 break;
             case PieceType.Rook:
-                Gizmos.DrawLine(transform.position + Vector3.up, transform.position - Vector3.up);
-                Gizmos.DrawLine(transform.position + Vector3.left, transform.position - Vector3.left);
+                Gizmos.DrawLine(transform.position + Vector3.up * 7, transform.position - Vector3.up * 7);
+                Gizmos.DrawLine(transform.position + Vector3.left * 7, transform.position - Vector3.left  * 7);
                 break;
             case PieceType.Knight:
-                Gizmos.DrawLine(transform.position + Vector3.up, transform.position - Vector3.up);
-                Gizmos.DrawLine(transform.position + Vector3.left, transform.position - Vector3.left);
+                Gizmos.DrawLine(transform.position + Vector3.up * 2, transform.position - Vector3.up * 2);
+                Gizmos.DrawLine(transform.position + (Vector3.up * 2) + Vector3.left, transform.position + (Vector3.up * 2) + Vector3.right);
+                Gizmos.DrawLine(transform.position + (-Vector3.up * 2) + Vector3.left, transform.position + (-Vector3.up * 2) + Vector3.right);
+                Gizmos.DrawLine(transform.position + Vector3.left * 2, transform.position - Vector3.left * 2);
+                Gizmos.DrawLine(transform.position + (Vector3.left * 2) + Vector3.up, transform.position + (Vector3.left * 2) - Vector3.up);
+                Gizmos.DrawLine(transform.position + (-Vector3.left * 2) + Vector3.up, transform.position + (-Vector3.left * 2) - Vector3.up);
                 break;
             case PieceType.Bishop:
-                Gizmos.DrawLine(transform.position + Vector3.up, transform.position - Vector3.up);
-                Gizmos.DrawLine(transform.position + Vector3.left, transform.position - Vector3.left);
+                Gizmos.DrawLine(transform.position + Vector3.up * 7 + Vector3.right * 7, transform.position - Vector3.up * 7 + Vector3.left * 7);
+                Gizmos.DrawLine(transform.position + Vector3.up * 7 + Vector3.left * 7, transform.position - Vector3.up * 7 + Vector3.right * 7);
                 break;
             case PieceType.Queen:
-                Gizmos.DrawLine(transform.position + Vector3.up, transform.position - Vector3.up);
-                Gizmos.DrawLine(transform.position + Vector3.left, transform.position - Vector3.left);
+                Gizmos.DrawLine(transform.position + Vector3.up * 7, transform.position - Vector3.up * 7);
+                Gizmos.DrawLine(transform.position + Vector3.up * 7 + Vector3.right * 7, transform.position - Vector3.up * 7 + Vector3.left * 7);
+                Gizmos.DrawLine(transform.position + Vector3.left * 7, transform.position - Vector3.left * 7);
+                Gizmos.DrawLine(transform.position + Vector3.up * 7 + Vector3.left * 7, transform.position - Vector3.up * 7 + Vector3.right * 7);
                 break;
             case PieceType.King:
                 Gizmos.DrawLine(transform.position + Vector3.up, transform.position - Vector3.up);
+                Gizmos.DrawLine(transform.position + Vector3.up + Vector3.right, transform.position - Vector3.up + Vector3.left);
                 Gizmos.DrawLine(transform.position + Vector3.left, transform.position - Vector3.left);
+                Gizmos.DrawLine(transform.position + Vector3.up + Vector3.left, transform.position - Vector3.up + Vector3.right);
                 break;
         }
     }
